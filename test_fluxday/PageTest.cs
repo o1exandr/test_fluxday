@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -15,14 +11,19 @@ namespace test_fluxday
         [Test]
         public void site_login_page()
         {
-            
-            IWebDriver browser = new FirefoxDriver();
-            browser.Navigate().GoToUrl("https://app.fluxday.io/");
-            //IWebElement header = browser.FindElement(By.Id("Fluxday"));
-            browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
 
-            //Assert.True(header.Displayed);
-            browser.Close();
+            IWebDriver driver = new FirefoxDriver();
+            //IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://app.fluxday.io/");
+            driver.FindElement(By.Id("user_email")).Clear();
+            driver.FindElement(By.Id("user_email")).SendKeys("admin@fluxday.io");
+            driver.FindElement(By.Id("user_password")).Clear();
+            driver.FindElement(By.Id("user_password")).SendKeys("password");
+            driver.FindElement(By.ClassName("btn-login")).Click();
+          
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
+            
+            driver.Close();
 
         }
     }
